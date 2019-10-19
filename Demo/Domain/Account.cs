@@ -10,7 +10,8 @@ namespace Domain
         {
             CheckVersion(version);
             if (value >= 0) throw new ValidationException("Debit amount must be less than 0.");
-            if (Balance < value) throw new ValidationException("Insufficient balance.");
+            if (Balance + value < 0) throw new ValidationException("Insufficient balance.");
+
             Balance += value;
             RecordEvent(v => new AccountDebited(Id, v, value, Balance));
         }
@@ -19,6 +20,7 @@ namespace Domain
         {
             CheckVersion(version);
             if (value <= 0) throw new ValidationException("Credit amount must be greater than 0.");
+
             Balance += value;
             RecordEvent(v => new AccountCredited(Id, v, value, Balance));
         }
