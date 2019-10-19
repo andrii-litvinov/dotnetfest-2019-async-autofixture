@@ -1,4 +1,5 @@
 ﻿using System;
+using Contracts.Events;
 
 namespace Domain
 {
@@ -12,6 +13,15 @@ namespace Domain
             if (Balance < value) throw new ValidationException("Insufficient balance.");
             Balance -= value;
             Events.Add(new AccountDebited(Id, value, Balance));
+        }
+
+        public static Account Create(string id)
+        {
+            return new Account
+            {
+                Id = id,
+                Events = {new AccountCreated(id)}
+            };
         }
     }
 

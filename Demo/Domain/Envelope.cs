@@ -1,3 +1,5 @@
+using Contracts.Events;
+
 namespace Domain
 {
     public class Envelope

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Contracts.Events;
 using MongoDB.Bson;
 
 namespace Domain

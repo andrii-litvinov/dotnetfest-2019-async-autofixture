@@ -1,4 +1,4 @@
-namespace Domain
+namespace Contracts.Events
 {
     public class AccountDebited : DomainEvent
     {

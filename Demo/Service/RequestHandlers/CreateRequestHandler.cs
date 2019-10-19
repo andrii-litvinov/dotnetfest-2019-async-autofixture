@@ -16,7 +16,7 @@ namespace Service.RequestHandlers
                     "Handle",
                     "GetAccountRequestHandler",
                     new {command.Id}),
-                new { });
+                null);
         }
     }
 }
