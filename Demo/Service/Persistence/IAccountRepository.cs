@@ -7,5 +7,6 @@ namespace Service.Persistence
     {
         Task Create(Account account);
         Task Update(Account account);
+        Task<Account> Find(string commandId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Contracts.Commands;
 using Microsoft.AspNetCore.Mvc;
+using Service.CommandHandlers;
 using Service.Common;
 
 namespace Service.RequestHandlers
@@ -8,9 +9,14 @@ namespace Service.RequestHandlers
     [Route("debit")]
     public class DebitRequestHandler : CommandRequestHandler<DebitAccount>
     {
+        private readonly ICommandHandler<DebitAccount> handler;
+
+        public DebitRequestHandler(ICommandHandler<DebitAccount> handler) => this.handler = handler;
+
         public override async Task<IActionResult> Handle(DebitAccount command)
         {
-            return Ok(new {command.Amount});
+            await handler.Handle(command);
+            return Ok();
         }
     }
 }

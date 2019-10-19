@@ -18,6 +18,8 @@ namespace Service.Persistence
             collection = database.GetCollection<Account>("accounts");
         }
 
+        public Task<Account> Find(string id) => collection.Find(a => a.Id == id).FirstOrDefaultAsync();
+
         public async Task Create(Account account)
         {
             PopulateOutbox(account);
@@ -41,7 +43,6 @@ namespace Service.Persistence
         private void PopulateOutbox(AggregateRoot account)
         {
             foreach (var @event in account.Events)
-            {
                 account.Outbox.Add(new Envelope
                 {
                     EventId = Guid.NewGuid().ToString(),
@@ -49,7 +50,6 @@ namespace Service.Persistence
                     CorrelationId = accessor.Trace.CorrelationId,
                     CausationId = accessor.Trace.CausationId
                 });
-            }
         }
     }
 }
