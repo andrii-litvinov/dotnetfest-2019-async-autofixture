@@ -5,7 +5,7 @@ using Service.QueryHandlers;
 
 namespace Service.RequestHandlers
 {
-    [Route("get-account/{id}")]
+    [Route("get-account/{accountId}")]
     public class GetAccountRequestHandler : QueryRequestHandler<GetAccount>
     {
         private readonly IQueryDispatcher dispatcher;

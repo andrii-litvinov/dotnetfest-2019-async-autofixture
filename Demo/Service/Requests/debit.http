@@ -2,9 +2,9 @@ POST http://localhost:5000/debit
 Content-Type: application/json
 
 {
-  "accountId": "5daaf9d3bd2e64165cc3c335",
-  "amount": -250,
-  "version": 4
+  "accountId": "5daafe5ab1ebe053fc76d970",
+  "amount": -5,
+  "version": 5
 }
 
 ###

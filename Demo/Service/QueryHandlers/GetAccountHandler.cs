@@ -12,7 +12,7 @@ namespace Service.QueryHandlers
             collection = database.GetCollection<Domain.Account>("accounts");
 
         public Task<Account> Handle(GetAccount query) => collection
-            .Find(account => account.Id == query.Id)
+            .Find(account => account.Id == query.AccountId)
             .Project(account => new Account
             {
                 Id = account.Id,

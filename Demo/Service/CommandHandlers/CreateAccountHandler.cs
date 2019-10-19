@@ -13,7 +13,7 @@ namespace Service.CommandHandlers
 
         public async Task Handle(CreateAccount command)
         {
-            var account = Account.Create(command.Id);
+            var account = Account.Create(command.AccountId);
             await repository.Create(account);
         }
     }
