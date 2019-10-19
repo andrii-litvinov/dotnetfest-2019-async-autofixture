@@ -1,5 +1,4 @@
-﻿using System;
-using Contracts.Events;
+﻿using Contracts.Events;
 
 namespace Domain
 {
@@ -15,22 +14,10 @@ namespace Domain
             Events.Add(new AccountDebited(Id, value, Balance));
         }
 
-        public static Account Create(string id)
+        public static Account Create(string id) => new Account
         {
-            return new Account
-            {
-                Id = id,
-                Events = {new AccountCreated(id)}
-            };
-        }
-    }
-
-    public class ValidationException : Exception
-    {
-        // TODO: Handle in middleware and return BadRequest or Conflict response.
-
-        public ValidationException(string message) : base(message)
-        {
-        }
+            Id = id,
+            Events = {new AccountCreated(id)}
+        };
     }
 }

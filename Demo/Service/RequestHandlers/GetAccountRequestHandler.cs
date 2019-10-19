@@ -11,7 +11,7 @@ namespace Service.RequestHandlers
         public override async Task<IActionResult> Handle(GetAccount query)
         {
             // TODO: Return real account.
-            return Ok(new { query.Id });
+            return Ok(new {query.Id});
         }
     }
 }
