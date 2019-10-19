@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Domain;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Service.Tracing;
 
@@ -30,7 +29,7 @@ namespace Service.Persistence
         {
             PopulateOutbox(account);
 
-            var currentVersion = account.Version--;
+            var currentVersion = account.Version - 1;
             var result = await collection.ReplaceOneAsync(
                 a => a.Id == account.Id && a.Version == currentVersion, account);
 

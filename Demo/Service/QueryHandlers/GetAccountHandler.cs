@@ -16,6 +16,7 @@ namespace Service.QueryHandlers
             .Project(account => new Account
             {
                 Id = account.Id,
+                Version = account.Version,
                 Balance = account.Balance
             })
             .FirstOrDefaultAsync();

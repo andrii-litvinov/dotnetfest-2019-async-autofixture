@@ -1,10 +1,10 @@
-POST http://localhost:5000/debit
+POST http://localhost:5000/credit
 Content-Type: application/json
 
 {
   "accountId": "5daaf9d3bd2e64165cc3c335",
-  "amount": -250,
-  "version": 4
+  "amount": 500,
+  "version": 1
 }
 
 ###

@@ -11,5 +11,10 @@ namespace Domain
         public ulong Version { get; set; }
         public List<DomainEvent> Events { get; } = new List<DomainEvent>();
         public List<Envelope> Outbox { get; } = new List<Envelope>();
+
+        protected void CheckVersion(ulong version)
+        {
+            if (Version != version) throw new ValidationException("Account is already of newer version.");
+        }
     }
 }

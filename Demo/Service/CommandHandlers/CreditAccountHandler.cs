@@ -4,16 +4,16 @@ using Service.Persistence;
 
 namespace Service.CommandHandlers
 {
-    public class DebitAccountHandler : ICommandHandler<DebitAccount>
+    public class CreditAccountHandler : ICommandHandler<CreditAccount>
     {
         private readonly IAccountRepository repository;
 
-        public DebitAccountHandler(IAccountRepository repository) => this.repository = repository;
+        public CreditAccountHandler(IAccountRepository repository) => this.repository = repository;
 
-        public async Task Handle(DebitAccount command)
+        public async Task Handle(CreditAccount command)
         {
             var account = await repository.Find(command.AccountId);
-            account.Debit(command.Amount, command.Version);
+            account.Credit(command.Amount, command.Version);
             await repository.Update(account);
         }
     }

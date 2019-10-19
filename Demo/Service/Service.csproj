@@ -10,10 +10,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Requests" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="MongoDB.Driver" Version="2.9.2" />
         <PackageReference Include="SimpleInjector" Version="4.7.1" />
         <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc.Core" Version="4.7.1" />
