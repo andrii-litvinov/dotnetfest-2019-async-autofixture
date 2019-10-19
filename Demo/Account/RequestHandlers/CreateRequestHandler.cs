@@ -11,7 +11,8 @@ namespace Account.RequestHandlers
         public override async Task<IActionResult> Handle(CreateAccount command)
         {
             // TODO: Create and return account.
-            return Created(Url.Action(
+            return Created(
+                Url.Action(
                     "Handle",
                     "GetAccountRequestHandler",
                     new {command.Id}),
