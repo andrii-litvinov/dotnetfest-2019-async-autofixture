@@ -4,7 +4,6 @@ namespace Domain
 {
     public class Account : AggregateRoot
     {
-        public string Id { get; set; }
         public decimal Balance { get; set; }
 
         public void Debit(decimal value)

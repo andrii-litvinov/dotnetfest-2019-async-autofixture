@@ -1,8 +1,6 @@
 POST http://localhost:5000/create
 Content-Type: application/json
 
-{
-  "id": "5daaba1d86d288166f7f9d28"
-}
+{}
 
 ###

@@ -1,8 +1,13 @@
 using System.Threading.Tasks;
+using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using Service.CommandHandlers;
 using Service.Persistence;
@@ -40,6 +45,25 @@ namespace Service
                         container.Register<IAccountRepository, AccountRepository>();
                         container.RegisterSingleton(() => new MongoClient().GetDatabase("dotnetfest"));
                         container.Register<ITraceContextAccessor, TraceContextAccessor>();
+
+                        ConventionRegistry.Register("camelcase", new ConventionPack
+                        {
+                            new CamelCaseElementNameConvention()
+                        }, type => true);
+
+                        BsonClassMap.RegisterClassMap<AggregateRoot>(map =>
+                        {
+                            map.AutoMap();
+                            map
+                                .MapMember(root => root.Id)
+                                .SetSerializer(new StringSerializer(BsonType.ObjectId));
+                        });
+
+                        BsonClassMap.RegisterClassMap<Envelope>(map =>
+                        {
+                            map.AutoMap();
+                            map.SetDiscriminatorIsRequired(true);
+                        });
 
                         container.Verify();
 
