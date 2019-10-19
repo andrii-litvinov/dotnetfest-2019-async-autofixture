@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Contracts.Events;
-using MongoDB.Bson;
 
 namespace Domain
 {
@@ -9,7 +8,7 @@ namespace Domain
         // TODO: Consider aggregate version instead of timestamp.
 
         public string Id { get; set; }
-        public BsonTimestamp Timestamp { get; set; } = new BsonTimestamp(0, 0);
+        public ulong Version { get; set; }
         public List<DomainEvent> Events { get; } = new List<DomainEvent>();
         public List<Envelope> Outbox { get; } = new List<Envelope>();
     }

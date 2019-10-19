@@ -30,11 +30,9 @@ namespace Service.Persistence
         {
             PopulateOutbox(account);
 
-            var timestamp = account.Timestamp;
-            account.Timestamp = new BsonTimestamp(0, 0);
-
+            var currentVersion = account.Version--;
             var result = await collection.ReplaceOneAsync(
-                a => a.Id == account.Id && a.Timestamp == timestamp, account);
+                a => a.Id == account.Id && a.Version == currentVersion, account);
 
             if (result.ModifiedCount == 0)
                 throw new Exception($"Cannot update account '{account.Id}' due to optimistic concurrency error.");
