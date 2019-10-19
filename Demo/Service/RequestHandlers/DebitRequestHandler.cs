@@ -2,7 +2,6 @@
 using Contracts.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Service.CommandHandlers;
-using Service.Common;
 
 namespace Service.RequestHandlers
 {

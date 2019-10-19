@@ -3,7 +3,6 @@ using Contracts.Commands;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Service.CommandHandlers;
-using Service.Common;
 
 namespace Service.RequestHandlers
 {

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Service.Common
+namespace Service.RequestHandlers
 {
     [ApiController]
     public abstract class CommandRequestHandler<T> : ControllerBase where T : class

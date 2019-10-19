@@ -1,17 +1,21 @@
 using System.Threading.Tasks;
 using Contracts.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Service.Common;
+using Service.QueryHandlers;
 
 namespace Service.RequestHandlers
 {
     [Route("get-account/{id}")]
     public class GetAccountRequestHandler : QueryRequestHandler<GetAccount>
     {
+        private readonly IQueryDispatcher dispatcher;
+
+        public GetAccountRequestHandler(IQueryDispatcher dispatcher) => this.dispatcher = dispatcher;
+
         public override async Task<IActionResult> Handle(GetAccount query)
         {
-            // TODO: Return real account.
-            return Ok(new {query.Id});
+            var account = await dispatcher.Dispatch(query);
+            return account != null ? (IActionResult) Ok(account) : NotFound();
         }
     }
 }
