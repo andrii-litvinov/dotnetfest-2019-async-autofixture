@@ -13,7 +13,6 @@ using MongoDB.Driver;
 using Service.CommandHandlers;
 using Service.Persistence;
 using Service.QueryHandlers;
-using Service.RequestHandlers;
 using Service.Tracing;
 using SimpleInjector;
 
