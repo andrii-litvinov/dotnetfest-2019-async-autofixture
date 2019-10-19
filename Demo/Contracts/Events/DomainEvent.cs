@@ -2,10 +2,13 @@ namespace Contracts.Events
 {
     public abstract class DomainEvent
     {
-        // TODO: Include event id into the event.
-
-        public DomainEvent(string sourceId) => SourceId = sourceId;
+        public DomainEvent(string sourceId, ulong version)
+        {
+            SourceId = sourceId;
+            Version = version;
+        }
 
         public string SourceId { get; set; }
+        public ulong Version { get; set; }
     }
 }

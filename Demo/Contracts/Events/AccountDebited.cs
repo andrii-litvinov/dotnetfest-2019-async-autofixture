@@ -2,7 +2,7 @@ namespace Contracts.Events
 {
     public class AccountDebited : DomainEvent
     {
-        public AccountDebited(string sourceId, decimal value, decimal amount) : base(sourceId)
+        public AccountDebited(string accountId, ulong version, decimal value, decimal amount) : base(accountId, version)
         {
             Value = value;
             Amount = amount;

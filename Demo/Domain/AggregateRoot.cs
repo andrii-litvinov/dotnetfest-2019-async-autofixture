@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Contracts.Events;
 
@@ -17,10 +18,10 @@ namespace Domain
             if (Version != version) throw new ValidationException("Account is already of newer version.");
         }
 
-        protected void RecordEvent(DomainEvent @event)
+        protected void RecordEvent(Func<ulong, DomainEvent> func)
         {
-            events.Add(@event);
             Version++;
+            events.Add(func(Version));
         }
     }
 }
