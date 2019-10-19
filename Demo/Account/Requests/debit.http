@@ -1,0 +1,8 @@
+POST http://localhost:5000/debit
+Content-Type: application/json
+
+{
+  "amount": 500
+}
+
+###

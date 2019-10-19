@@ -7,5 +7,9 @@
     <ItemGroup>
       <ProjectReference Include="..\Contracts\Contracts.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Requests" />
+    </ItemGroup>
     
 </Project>

@@ -1,15 +1,16 @@
 ﻿using System.Threading.Tasks;
-using Contracts;
+using Account.Common;
+using Contracts.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Account.RequestHandlers
 {
     [Route("debit")]
-    public class DebitRequestHandler : RequestHandler<DebitAccount>
+    public class DebitRequestHandler : CommandRequestHandler<DebitAccount>
     {
         public override async Task<IActionResult> Handle(DebitAccount command)
         {
-            return Ok();
+            return Ok(new {command.Amount});
         }
     }
 }
