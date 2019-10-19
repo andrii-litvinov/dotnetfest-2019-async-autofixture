@@ -6,5 +6,6 @@ namespace Service.Persistence
     public interface IAccountRepository
     {
         Task Create(Account account);
+        Task Update(Account account);
     }
 }
