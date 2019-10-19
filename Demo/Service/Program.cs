@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Contracts.Events;
 using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
