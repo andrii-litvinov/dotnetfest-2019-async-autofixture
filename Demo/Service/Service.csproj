@@ -2,13 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
+        <RootNamespace>Account</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Contracts\Contracts.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="CommandHandlers" />
+      <Folder Include="QueryHandlers" />
       <Folder Include="Requests" />
     </ItemGroup>
     
