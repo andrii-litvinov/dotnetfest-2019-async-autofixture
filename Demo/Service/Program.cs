@@ -50,9 +50,10 @@ namespace Service
                         container.RegisterSingleton(() => new MongoClient().GetDatabase("dotnetfest"));
                         container.Register<ITraceContextAccessor, TraceContextAccessor>();
 
-                        ConventionRegistry.Register("camelcase", new ConventionPack
+                        ConventionRegistry.Register("conventions", new ConventionPack
                         {
-                            new CamelCaseElementNameConvention()
+                            new CamelCaseElementNameConvention(),
+                            new IgnoreExtraElementsConvention(true)
                         }, type => true);
 
                         BsonClassMap.RegisterClassMap<AggregateRoot>(map =>
@@ -61,6 +62,8 @@ namespace Service
                             map
                                 .MapMember(root => root.Id)
                                 .SetSerializer(new StringSerializer(BsonType.ObjectId));
+                            map.UnmapMember(root => root.Events);
+                            map.MapMember(root => root.Outbox).SetElementName("_outbox");
                         });
 
                         BsonClassMap.RegisterClassMap<Envelope>(map =>
