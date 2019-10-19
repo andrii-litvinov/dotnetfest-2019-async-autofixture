@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Account.Common;
 using Contracts.Commands;
 using Microsoft.AspNetCore.Mvc;
+using Service.Common;
 
-namespace Account.RequestHandlers
+namespace Service.RequestHandlers
 {
     [Route("create")]
     public class CreateRequestHandler : CommandRequestHandler<CreateAccount>

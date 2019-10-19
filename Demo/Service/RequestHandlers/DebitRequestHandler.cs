@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Account.Common;
 using Contracts.Commands;
 using Microsoft.AspNetCore.Mvc;
+using Service.Common;
 
-namespace Account.RequestHandlers
+namespace Service.RequestHandlers
 {
     [Route("debit")]
     public class DebitRequestHandler : CommandRequestHandler<DebitAccount>
