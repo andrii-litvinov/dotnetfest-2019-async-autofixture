@@ -4,16 +4,17 @@ namespace Domain
 {
     public class Account : AggregateRoot
     {
+        private Account()
+        {
+        }
+
         public decimal Balance { get; set; }
 
-        public void Debit(decimal value, ulong version)
+        public static Account Create(string id)
         {
-            CheckVersion(version);
-            if (value >= 0) throw new ValidationException("Debit amount must be less than 0.");
-            if (Balance + value < 0) throw new ValidationException("Insufficient balance.");
-
-            Balance += value;
-            RecordEvent(v => new AccountDebited(Id, v, value, Balance));
+            var account = new Account {Id = id};
+            account.RecordEvent(v => new AccountCreated(account.Id, v));
+            return account;
         }
 
         public void Credit(decimal value, ulong version)
@@ -25,11 +26,14 @@ namespace Domain
             RecordEvent(v => new AccountCredited(Id, v, value, Balance));
         }
 
-        public static Account Create(string id)
+        public void Debit(decimal value, ulong version)
         {
-            var account = new Account {Id = id};
-            account.RecordEvent(v => new AccountCreated(account.Id, v));
-            return account;
+            CheckVersion(version);
+            if (value >= 0) throw new ValidationException("Debit amount must be less than 0.");
+            if (Balance + value < 0) throw new ValidationException("Insufficient balance.");
+
+            Balance += value;
+            RecordEvent(v => new AccountDebited(Id, v, value, Balance));
         }
     }
 }
