@@ -9,6 +9,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using Service.Handlers.Commands;
+using Service.Handlers.Commands.Decorators;
 using Service.Handlers.Queries;
 using Service.Handlers.Queries.Decorators;
 using Service.Persistence;
@@ -21,10 +22,10 @@ namespace Service
     {
         public static void ConfigureContainer(this Container container)
         {
-            // TODO: Register query and command handler logging/retry decorators.
-
             container.RegisterSingleton(() => new MongoClient().GetDatabase("dotnetfest"));
+
             container.Register(typeof(ICommandHandler<>), typeof(Configuration).Assembly);
+            container.RegisterDecorator(typeof(ICommandHandler<>), typeof(CommandLoggingDecorator<>));
 
             container.Register(typeof(IQueryHandler<,>), typeof(Configuration).Assembly);
             container.RegisterDecorator(typeof(IQueryHandler<,>), typeof(QueryLoggingDecorator<,>));

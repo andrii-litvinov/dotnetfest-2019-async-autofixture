@@ -19,17 +19,15 @@ namespace Service.Handlers.Queries.Decorators
 
         public async Task<TResult> Handle(TQuery query)
         {
+            logger.Debug("Handling {@Query}", query);
+
             var timestamp = Stopwatch.GetTimestamp();
-            try
-            {
-                logger.Debug("Handling {@Query}", query);
-                return await decorated.Handle(query);
-            }
-            finally
-            {
-                var duration = TimeSpan.FromTicks(Stopwatch.GetTimestamp() - timestamp);
-                logger.Debug("{@Query} handled in {@Duration}ms", query, duration.Milliseconds);
-            }
+            var result = await decorated.Handle(query);
+
+            var duration = TimeSpan.FromTicks(Stopwatch.GetTimestamp() - timestamp);
+            logger.Debug("Handled in {@Duration}ms", duration.Milliseconds);
+
+            return result;
         }
     }
 }
