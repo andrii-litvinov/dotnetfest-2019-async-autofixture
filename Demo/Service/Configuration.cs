@@ -8,9 +8,12 @@ using MongoDB.Driver;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting.Compact;
+using Serilog.Sinks.SystemConsole.Themes;
 using Service.CommandHandlers;
 using Service.Persistence;
 using Service.QueryHandlers;
+using Service.QueryHandlers.Decorators;
 using Service.Tracing;
 using SimpleInjector;
 
@@ -24,7 +27,10 @@ namespace Service
 
             container.RegisterSingleton(() => new MongoClient().GetDatabase("dotnetfest"));
             container.Register(typeof(ICommandHandler<>), typeof(Configuration).Assembly);
+
             container.Register(typeof(IQueryHandler<,>), typeof(Configuration).Assembly);
+            container.RegisterDecorator(typeof(IQueryHandler<,>), typeof(QueryLoggingDecorator<,>));
+
             container.Register<IQueryDispatcher, QueryDispatcher>();
             container.Register<IAccountRepository, AccountRepository>();
             container.Register<ITraceContextAccessor, TraceContextAccessor>();
@@ -33,8 +39,12 @@ namespace Service
         public static Logger CreateLogger() =>
             new LoggerConfiguration()
                 .MinimumLevel.Debug()
-//                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
-                .WriteTo.Async(c => c.LiterateConsole(LogEventLevel.Debug))
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                .WriteTo.Async(c => c.Console(
+                    new RenderedCompactJsonFormatter(),
+                    LogEventLevel.Debug
+//                    theme: AnsiConsoleTheme.Code
+                ))
                 .Enrich.WithDemystifiedStackTraces()
                 .Enrich.FromLogContext()
                 .Enrich.WithProperty("Service", typeof(Configuration).Assembly.GetName().Name)
