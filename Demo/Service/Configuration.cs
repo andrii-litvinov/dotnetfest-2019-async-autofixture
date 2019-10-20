@@ -8,7 +8,6 @@ using MongoDB.Driver;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
-using Serilog.Formatting.Compact;
 using Service.CommandHandlers;
 using Service.Persistence;
 using Service.QueryHandlers;
@@ -40,9 +39,8 @@ namespace Service
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                 .WriteTo.Async(c => c.Console(
-                    new RenderedCompactJsonFormatter(),
+//                    new RenderedCompactJsonFormatter(),
                     LogEventLevel.Debug
-//                    theme: AnsiConsoleTheme.Code
                 ))
                 .Enrich.WithDemystifiedStackTraces()
                 .Enrich.FromLogContext()
