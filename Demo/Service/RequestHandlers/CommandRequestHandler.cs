@@ -7,6 +7,6 @@ namespace Service.RequestHandlers
     public abstract class CommandRequestHandler<T> : ControllerBase where T : class
     {
         [HttpPost]
-        public abstract Task<IActionResult> Handle(T message);
+        public abstract Task<IActionResult> Handle(T command);
     }
 }

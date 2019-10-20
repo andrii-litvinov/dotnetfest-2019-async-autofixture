@@ -1,21 +1,37 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog.Extensions.Logging;
 using SimpleInjector;
+using ILogger = Serilog.ILogger;
 
 namespace Service
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             using var container = new Container();
-            await CreateHostBuilder(container, args).Build().RunAsync();
+            using var logger = Configuration.CreateLogger();
+
+            try
+            {
+                await CreateHostBuilder(container, logger, args).Build().RunAsync();
+            }
+            catch (Exception e)
+            {
+                logger.Fatal(e, "Service crashed.");
+                return 1;
+            }
+
+            return 0;
         }
 
-        public static IHostBuilder CreateHostBuilder(Container container, string[] args) =>
+        public static IHostBuilder CreateHostBuilder(Container container, ILogger logger, string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => webBuilder
                     .ConfigureServices(services =>
@@ -25,11 +41,13 @@ namespace Service
                             .AddAspNetCore()
                             .AddControllerActivation()
                         );
-                        container.Configure();
+                        container.ConfigureContainer();
+                        container.RegisterInstance(logger);
+                        services.AddSingleton<ILoggerFactory>(provider => new SerilogLoggerFactory(logger));
                     })
                     .Configure(app =>
                     {
-                        BsonConfiguration.Configure();
+                        Configuration.ConfigureBson();
                         app.UseSimpleInjector(container);
                         container.Verify();
 

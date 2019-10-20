@@ -7,6 +7,6 @@ namespace Service.RequestHandlers
     public abstract class QueryRequestHandler<T> : ControllerBase where T : class
     {
         [HttpGet]
-        public abstract Task<IActionResult> Handle([FromRoute, FromQuery] T message);
+        public abstract Task<IActionResult> Handle([FromRoute, FromQuery] T query);
     }
 }
