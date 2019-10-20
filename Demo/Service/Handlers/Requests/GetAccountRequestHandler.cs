@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Contracts.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Service.QueryHandlers;
+using Service.Handlers.Queries;
 
-namespace Service.RequestHandlers
+namespace Service.Handlers.Requests
 {
     [Route("get-account/{accountId}")]
     public class GetAccountRequestHandler : QueryRequestHandler<GetAccount>

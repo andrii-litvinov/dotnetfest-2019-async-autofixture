@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Contracts.Queries;
 using Serilog;
 
-namespace Service.QueryHandlers.Decorators
+namespace Service.Handlers.Queries.Decorators
 {
     public class QueryLoggingDecorator<TQuery, TResult> : IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>
     {

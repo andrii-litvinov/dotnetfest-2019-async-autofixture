@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Service.CommandHandlers
+namespace Service.Handlers.Commands
 {
     public interface ICommandHandler<T>
     {

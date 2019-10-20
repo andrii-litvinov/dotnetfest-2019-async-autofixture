@@ -3,7 +3,7 @@ using Contracts.Commands;
 using Domain;
 using Service.Persistence;
 
-namespace Service.CommandHandlers
+namespace Service.Handlers.Commands
 {
     public class CreateAccountHandler : ICommandHandler<CreateAccount>
     {

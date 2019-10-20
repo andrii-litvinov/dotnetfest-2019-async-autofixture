@@ -8,10 +8,10 @@ using MongoDB.Driver;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
-using Service.CommandHandlers;
+using Service.Handlers.Commands;
+using Service.Handlers.Queries;
+using Service.Handlers.Queries.Decorators;
 using Service.Persistence;
-using Service.QueryHandlers;
-using Service.QueryHandlers.Decorators;
 using Service.Tracing;
 using SimpleInjector;
 

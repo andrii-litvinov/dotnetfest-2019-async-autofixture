@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Contracts.Queries;
 using SimpleInjector;
 
-namespace Service.QueryHandlers
+namespace Service.Handlers.Queries
 {
     public class QueryDispatcher : IQueryDispatcher
     {

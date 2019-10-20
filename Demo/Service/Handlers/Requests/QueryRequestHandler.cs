@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Service.RequestHandlers
+namespace Service.Handlers.Requests
 {
     [ApiController]
     public abstract class QueryRequestHandler<T> : ControllerBase where T : class

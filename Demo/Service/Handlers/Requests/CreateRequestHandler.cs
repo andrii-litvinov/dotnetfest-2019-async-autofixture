@@ -3,10 +3,10 @@ using Contracts.Commands;
 using Contracts.Queries;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Service.CommandHandlers;
-using Service.QueryHandlers;
+using Service.Handlers.Commands;
+using Service.Handlers.Queries;
 
-namespace Service.RequestHandlers
+namespace Service.Handlers.Requests
 {
     [Route("create")]
     public class CreateRequestHandler : CommandRequestHandler<CreateAccount>

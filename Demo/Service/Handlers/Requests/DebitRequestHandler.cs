@@ -2,10 +2,10 @@
 using Contracts.Commands;
 using Contracts.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Service.CommandHandlers;
-using Service.QueryHandlers;
+using Service.Handlers.Commands;
+using Service.Handlers.Queries;
 
-namespace Service.RequestHandlers
+namespace Service.Handlers.Requests
 {
     [Route("debit")]
     public class DebitRequestHandler : CommandRequestHandler<DebitAccount>

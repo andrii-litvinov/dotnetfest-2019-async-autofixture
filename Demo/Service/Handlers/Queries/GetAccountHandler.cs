@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Contracts.Queries;
 using MongoDB.Driver;
 
-namespace Service.QueryHandlers
+namespace Service.Handlers.Queries
 {
     public class GetAccountHandler : IQueryHandler<GetAccount, Account>
     {

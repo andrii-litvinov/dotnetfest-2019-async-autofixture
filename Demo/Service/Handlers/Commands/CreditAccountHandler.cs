@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Contracts.Commands;
 using Service.Persistence;
 
-namespace Service.CommandHandlers
+namespace Service.Handlers.Commands
 {
     public class CreditAccountHandler : ICommandHandler<CreditAccount>
     {
