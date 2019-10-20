@@ -9,7 +9,6 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
-using Serilog.Sinks.SystemConsole.Themes;
 using Service.CommandHandlers;
 using Service.Persistence;
 using Service.QueryHandlers;

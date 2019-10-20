@@ -1,4 +1,4 @@
-namespace Service.Tracing
+namespace Contracts
 {
     public class Trace
     {

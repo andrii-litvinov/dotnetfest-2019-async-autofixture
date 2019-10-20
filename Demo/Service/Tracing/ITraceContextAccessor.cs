@@ -1,3 +1,5 @@
+using Contracts;
+
 namespace Service.Tracing
 {
     public interface ITraceContextAccessor

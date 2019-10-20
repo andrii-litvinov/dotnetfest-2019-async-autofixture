@@ -1,10 +1,11 @@
 using System.Threading;
+using Contracts;
 
 namespace Service.Tracing
 {
     public class TraceContextAccessor : ITraceContextAccessor
     {
-        // TODO: Set in middleware.
+        // TODO: Investigate how it correlates with Activity and distributed tracing.
 
         private static readonly AsyncLocal<Trace> trace = new AsyncLocal<Trace>();
 

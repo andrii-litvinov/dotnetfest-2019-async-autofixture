@@ -27,7 +27,7 @@ namespace Service.QueryHandlers.Decorators
             }
             finally
             {
-                var duration = TimeSpan.FromTicks(timestamp - Stopwatch.GetTimestamp());
+                var duration = TimeSpan.FromTicks(Stopwatch.GetTimestamp() - timestamp);
                 logger.Debug("{@Query} handled in {@Duration}ms", query, duration.Milliseconds);
             }
         }

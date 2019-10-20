@@ -46,8 +46,7 @@ namespace Service.Persistence
                 {
                     EventId = Guid.NewGuid().ToString(),
                     Event = @event,
-                    CorrelationId = accessor.Trace?.CorrelationId,
-                    CausationId = accessor.Trace?.CausationId
+                    Trace = accessor.Trace
                 });
         }
     }

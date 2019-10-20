@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
+using Service.Logging;
+using Service.Tracing;
 using SimpleInjector;
 using ILogger = Serilog.ILogger;
 
@@ -48,7 +50,11 @@ namespace Service
                     .Configure(app =>
                     {
                         Configuration.ConfigureBson();
-                        app.UseSimpleInjector(container);
+                        app.UseSimpleInjector(container, options =>
+                        {
+                            options.UseMiddleware<TracingMiddleware>(app);
+                            options.UseMiddleware<LoggingMiddleware>(app);
+                        });
                         container.Verify();
 
                         app.UseRouting();
