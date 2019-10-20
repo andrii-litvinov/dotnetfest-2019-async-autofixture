@@ -19,8 +19,8 @@ namespace Domain
 
         public void Credit(decimal value, ulong version)
         {
-            CheckVersion(version);
-            if (value <= 0) throw new ValidationException("Credit amount must be greater than 0.");
+            if (Version != version) throw new DomainException("Account is already of newer version.");
+            if (value <= 0) throw new DomainException("Credit amount must be greater than 0.");
 
             Balance += value;
             RecordEvent(v => new AccountCredited(Id, v, value, Balance));
@@ -28,9 +28,9 @@ namespace Domain
 
         public void Debit(decimal value, ulong version)
         {
-            CheckVersion(version);
-            if (value >= 0) throw new ValidationException("Debit amount must be less than 0.");
-            if (Balance + value < 0) throw new ValidationException("Insufficient balance.");
+            if (Version != version) throw new DomainException("Account is already of newer version.");
+            if (value >= 0) throw new DomainException("Debit amount must be less than 0.");
+            if (Balance + value < 0) throw new DomainException("Insufficient balance.");
 
             Balance += value;
             RecordEvent(v => new AccountDebited(Id, v, value, Balance));

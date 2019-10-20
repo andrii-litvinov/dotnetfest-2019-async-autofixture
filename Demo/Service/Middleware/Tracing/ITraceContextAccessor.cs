@@ -1,6 +1,6 @@
 using Contracts;
 
-namespace Service.Tracing
+namespace Service.Middleware.Tracing
 {
     public interface ITraceContextAccessor
     {

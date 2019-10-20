@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Contracts;
 using Microsoft.AspNetCore.Http;
 
-namespace Service.Tracing
+namespace Service.Middleware.Tracing
 {
     public class TracingMiddleware : IMiddleware
     {

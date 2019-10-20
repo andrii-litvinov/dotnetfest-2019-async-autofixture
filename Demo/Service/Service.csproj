@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <Folder Include="Handlers" />
+      <Folder Include="Middleware" />
     </ItemGroup>
 
 </Project>

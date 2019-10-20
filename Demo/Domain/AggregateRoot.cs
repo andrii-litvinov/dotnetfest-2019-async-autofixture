@@ -13,11 +13,6 @@ namespace Domain
         public IReadOnlyCollection<DomainEvent> Events => events;
         public List<Envelope> Outbox { get; } = new List<Envelope>();
 
-        protected void CheckVersion(ulong version)
-        {
-            if (Version != version) throw new ValidationException("Account is already of newer version.");
-        }
-
         protected void RecordEvent(Func<ulong, DomainEvent> func)
         {
             Version++;

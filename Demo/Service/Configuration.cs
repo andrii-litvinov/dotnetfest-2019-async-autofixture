@@ -12,8 +12,8 @@ using Service.Handlers.Commands;
 using Service.Handlers.Commands.Decorators;
 using Service.Handlers.Queries;
 using Service.Handlers.Queries.Decorators;
+using Service.Middleware.Tracing;
 using Service.Persistence;
-using Service.Tracing;
 using SimpleInjector;
 
 namespace Service

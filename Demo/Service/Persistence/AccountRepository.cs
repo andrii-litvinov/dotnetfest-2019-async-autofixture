@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Contracts.Events;
 using Domain;
 using MongoDB.Driver;
-using Service.Tracing;
+using Service.Middleware.Tracing;
 
 namespace Service.Persistence
 {

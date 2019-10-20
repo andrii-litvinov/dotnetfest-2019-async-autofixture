@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Serilog.Context;
-using Service.Tracing;
+using Service.Middleware.Tracing;
 
-namespace Service.Logging
+namespace Service.Middleware.Logging
 {
     public class LoggingMiddleware : IMiddleware
     {

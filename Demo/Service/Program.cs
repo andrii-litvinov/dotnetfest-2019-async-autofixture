@@ -6,8 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
-using Service.Logging;
-using Service.Tracing;
+using Service.Middleware.ExceptionHandling;
+using Service.Middleware.Logging;
+using Service.Middleware.Tracing;
 using SimpleInjector;
 using ILogger = Serilog.ILogger;
 
@@ -54,6 +55,7 @@ namespace Service
                         {
                             options.UseMiddleware<TracingMiddleware>(app);
                             options.UseMiddleware<LoggingMiddleware>(app);
+                            options.UseMiddleware<DomainExceptionHandlingMiddleware>(app);
                         });
                         container.Verify();
 
