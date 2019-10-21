@@ -1,5 +1,4 @@
 using System;
-using Contracts.Events;
 using Domain;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -27,12 +26,6 @@ namespace Service
                 map.UnmapMember(root => root.Events);
                 map.MapMember(root => root.Outbox).SetElementName("_outbox");
             });
-
-            BsonClassMap.RegisterClassMap<Envelope>(map =>
-            {
-                map.AutoMap();
-                map.SetDiscriminatorIsRequired(true);
-            });
         });
 
         public static void Configure() => lazy.Invoke();
@@ -45,8 +38,7 @@ namespace Service
 
             public void Invoke()
             {
-                // ReSharper disable once UnusedVariable
-                var value = Value;
+                var _ = Value;
             }
 
             private static object Invoke(Action action)
