@@ -41,11 +41,13 @@ namespace Tests.Primitives
 
     internal class AsyncContext
     {
-        private static readonly ThreadLocal<HashSet<IAsyncLifetime>> lifetimes = new ThreadLocal<HashSet<IAsyncLifetime>>();
+        private static readonly ThreadLocal<HashSet<IAsyncLifetime>> lifetimes =
+            new ThreadLocal<HashSet<IAsyncLifetime>>();
 
         public static void Init() => lifetimes.Value = new HashSet<IAsyncLifetime>();
         public static void Add(IAsyncLifetime lifetime) => lifetimes.Value.Add(lifetime);
-        public static IEnumerable<IAsyncLifetime> GetAsyncLifetimes() => lifetimes?.Value ?? Enumerable.Empty<IAsyncLifetime>();
+        public static IEnumerable<IAsyncLifetime> GetAsyncLifetimes() =>
+            lifetimes?.Value ?? Enumerable.Empty<IAsyncLifetime>();
     }
 
     internal class AsyncCustomization : ICustomization
@@ -59,7 +61,8 @@ namespace Tests.Primitives
 
     internal class AsyncTransformation : ISpecimenBuilderTransformation
     {
-        public ISpecimenBuilderNode Transform(ISpecimenBuilder builder) => new AsyncBuilderNode(builder);
+        public ISpecimenBuilderNode Transform(ISpecimenBuilder builder) =>
+            new AsyncBuilderNode(builder);
     }
 
     internal class AsyncBuilderNode : ISpecimenBuilderNode
