@@ -1,4 +1,5 @@
 using System;
+using Contracts.Events;
 using Domain;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -25,6 +26,14 @@ namespace Service
                     .SetSerializer(new StringSerializer(BsonType.ObjectId));
                 map.UnmapMember(root => root.Events);
                 map.MapMember(root => root.Outbox).SetElementName("_outbox");
+            });
+
+            BsonClassMap.RegisterClassMap<DomainEvent>(map =>
+            {
+                map.AutoMap();
+                map
+                    .MapMember(e => e.SourceId)
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId));
             });
         });
 
