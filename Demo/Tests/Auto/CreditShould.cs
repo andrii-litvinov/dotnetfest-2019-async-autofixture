@@ -17,7 +17,7 @@ namespace Tests.Auto
 {
     public class CreditShould
     {
-        [Theory, AccountWithBalanceConventions]
+        [Theory, Conventions]
         public async Task IncreaseBalanceBySpecifiedAmount(
             Account account, HttpClient client, IAccountRepository repository)
         {
@@ -50,9 +50,9 @@ namespace Tests.Auto
         }
     }
 
-    public class AccountWithBalanceConventions : AutoDataAttribute
+    public class Conventions : AutoDataAttribute
     {
-        public AccountWithBalanceConventions() : base(Configure)
+        public Conventions() : base(Configure)
         {
         }
 

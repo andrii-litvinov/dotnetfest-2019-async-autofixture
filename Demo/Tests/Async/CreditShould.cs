@@ -18,7 +18,7 @@ namespace Tests.Async
 {
     public class CreditShould : Primitives.Async
     {
-        [Theory, AccountWithBalanceConventions]
+        [Theory, Conventions]
         public async Task IncreaseBalanceBySpecifiedAmount(Account account, HttpClient client)
         {
             // Arrange
@@ -41,9 +41,9 @@ namespace Tests.Async
         }
     }
 
-    public class AccountWithBalanceConventions : AutoDataAttribute
+    public class Conventions : AutoDataAttribute
     {
-        public AccountWithBalanceConventions() : base(Configure)
+        public Conventions() : base(Configure)
         {
         }
 
