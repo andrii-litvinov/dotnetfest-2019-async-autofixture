@@ -12,8 +12,6 @@ namespace Tests.Primitives
 {
     public abstract class Async : IAsyncLifetime
     {
-        // Can only be applied to test classes and guaranties disposal of fixtures created by Auto Fixture.
-
         protected Async()
         {
             foreach (var asyncLifetime in AsyncContext.GetAsyncLifetimes())
