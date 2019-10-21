@@ -36,31 +36,34 @@ namespace Service
 
         public static IHostBuilder CreateHostBuilder(Container container, ILogger logger, string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder
-                    .ConfigureServices(services =>
-                    {
-                        services.AddControllers();
-                        services.AddSimpleInjector(container, options => options
-                            .AddAspNetCore()
-                            .AddControllerActivation()
-                        );
-                        container.ConfigureContainer();
-                        container.RegisterInstance(logger);
-                        services.AddSingleton<ILoggerFactory>(provider => new SerilogLoggerFactory(logger));
-                    })
-                    .Configure(app =>
-                    {
-                        Configuration.ConfigureBson();
-                        app.UseSimpleInjector(container, options =>
-                        {
-                            options.UseMiddleware<TracingMiddleware>(app);
-                            options.UseMiddleware<LoggingMiddleware>(app);
-                            options.UseMiddleware<DomainExceptionHandlingMiddleware>(app);
-                        });
-                        container.Verify();
+                .ConfigureWebHostDefaults(builder => { ConfigureWebHost(builder, container, logger); });
 
-                        app.UseRouting();
-                        app.UseEndpoints(endpoints => endpoints.MapControllers());
-                    }));
+        public static IWebHostBuilder ConfigureWebHost(
+            IWebHostBuilder builder, Container container, ILogger logger) => builder
+            .ConfigureServices(services =>
+            {
+                services.AddControllers();
+                services.AddSimpleInjector(container, options => options
+                    .AddAspNetCore()
+                    .AddControllerActivation()
+                );
+                container.ConfigureContainer();
+                container.RegisterInstance(logger);
+                services.AddSingleton<ILoggerFactory>(provider => new SerilogLoggerFactory(logger));
+            })
+            .Configure(app =>
+            {
+                BsonConfiguration.Configure();
+                app.UseSimpleInjector(container, options =>
+                {
+                    options.UseMiddleware<TracingMiddleware>(app);
+                    options.UseMiddleware<LoggingMiddleware>(app);
+                    options.UseMiddleware<DomainExceptionHandlingMiddleware>(app);
+                });
+                container.Verify();
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints => endpoints.MapControllers());
+            });
     }
 }
