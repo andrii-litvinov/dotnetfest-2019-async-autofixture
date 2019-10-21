@@ -11,7 +11,7 @@ using Service.Persistence;
 using SimpleInjector;
 using Xunit;
 
-namespace Tests
+namespace Tests.Basic
 {
     public class CreditShould : IAsyncLifetime
     {

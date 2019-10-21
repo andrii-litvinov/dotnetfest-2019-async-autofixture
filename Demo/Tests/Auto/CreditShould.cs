@@ -13,17 +13,17 @@ using Service.Persistence;
 using SimpleInjector;
 using Xunit;
 
-namespace Tests
+namespace Tests.Auto
 {
-    public class CreditShould2
+    public class CreditShould
     {
         [Theory, AccountWithBalanceConventions]
         public async Task IncreaseBalanceBySpecifiedAmount(
             Account account, HttpClient client, IAccountRepository repository)
         {
-            // Arrange
             try
             {
+                // Arrange
                 await repository.Create(account);
 
                 var command = new CreditAccount
@@ -40,8 +40,8 @@ namespace Tests
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var account1 = await response.Content.ReadAsAsync<Contracts.Queries.Account>();
                 account1.Id.Should().Be(account.Id);
-                account1.Balance.Should().Be(200);
-                account1.Version.Should().Be(3);
+                account1.Balance.Should().Be(50);
+                account1.Version.Should().Be(2);
             }
             finally
             {
@@ -61,7 +61,7 @@ namespace Tests
             var container = new Container();
             var fixture = new Fixture()
                 .Customize(new TestClientCustomization(container))
-                .Customize(new AccountWithBalanceCustomization());
+                .Customize(new AccountCustomization());
             fixture.Inject(container.GetInstance<IAccountRepository>());
             return fixture;
         }
@@ -81,12 +81,11 @@ namespace Tests
         }
     }
 
-    public class AccountWithBalanceCustomization : ICustomization
+    public class AccountCustomization : ICustomization
     {
         public void Customize(IFixture fixture)
         {
             var account = Account.Create(ObjectId.GenerateNewId().ToString());
-            account.Credit(150, account.Version);
             fixture.Inject(account);
         }
     }
