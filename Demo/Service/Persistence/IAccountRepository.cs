@@ -5,8 +5,9 @@ namespace Service.Persistence
 {
     public interface IAccountRepository
     {
+        Task<Account> Find(string accountId);
         Task Create(Account account);
         Task Update(Account account);
-        Task<Account> Find(string commandId);
+        Task Delete(string accountId);
     }
 }

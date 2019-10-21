@@ -36,10 +36,10 @@ namespace Service
 
         public static IHostBuilder CreateHostBuilder(Container container, ILogger logger, string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(builder => { ConfigureWebHost(builder, container, logger); });
+                .ConfigureWebHostDefaults(builder => { ConfigureWebHost(container, logger, builder); });
 
         public static IWebHostBuilder ConfigureWebHost(
-            IWebHostBuilder builder, Container container, ILogger logger) => builder
+            Container container, ILogger logger, IWebHostBuilder builder = null) => (builder ?? new WebHostBuilder())
             .ConfigureServices(services =>
             {
                 services.AddControllers();

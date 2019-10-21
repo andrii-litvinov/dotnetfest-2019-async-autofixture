@@ -18,8 +18,8 @@ namespace Service.Persistence
             collection = database.GetCollection<Account>("accounts");
         }
 
-        public Task<Account> Find(string id) =>
-            collection.Find(a => a.Id == id).FirstOrDefaultAsync();
+        public Task<Account> Find(string accountId) =>
+            collection.Find(a => a.Id == accountId).FirstOrDefaultAsync();
 
         public async Task Create(Account account)
         {
@@ -38,6 +38,9 @@ namespace Service.Persistence
             if (result.ModifiedCount == 0)
                 throw new Exception($"Cannot update account '{account.Id}' due to optimistic concurrency error.");
         }
+
+        public async Task Delete(string accountId) =>
+            await collection.DeleteOneAsync(account => account.Id == accountId);
 
         private void PopulateOutbox(AggregateRoot account)
         {
