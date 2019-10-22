@@ -57,7 +57,7 @@ namespace Service
                 app.UseSimpleInjector(container, options =>
                 {
                     options.UseMiddleware<TracingMiddleware>(app);
-                    options.UseMiddleware<LoggingMiddleware>(app);
+                    options.UseMiddleware<LoggingContextMiddleware>(app);
                     options.UseMiddleware<DomainExceptionHandlingMiddleware>(app);
                 });
                 container.Verify();

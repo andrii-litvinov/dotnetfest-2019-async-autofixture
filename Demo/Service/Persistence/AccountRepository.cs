@@ -36,7 +36,7 @@ namespace Service.Persistence
                 a => a.Id == account.Id && a.Version == versionToCheck, account);
 
             if (result.ModifiedCount == 0)
-                throw new Exception($"Cannot update account '{account.Id}' due to optimistic concurrency error.");
+                throw new DomainException("Account version does not match.");
         }
 
         public async Task Delete(string accountId) =>

@@ -5,11 +5,11 @@ using Service.Middleware.Tracing;
 
 namespace Service.Middleware.Logging
 {
-    public class LoggingMiddleware : IMiddleware
+    public class LoggingContextMiddleware : IMiddleware
     {
         private readonly ITraceContextAccessor accessor;
 
-        public LoggingMiddleware(ITraceContextAccessor accessor) => this.accessor = accessor;
+        public LoggingContextMiddleware(ITraceContextAccessor accessor) => this.accessor = accessor;
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
