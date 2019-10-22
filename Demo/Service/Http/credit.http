@@ -2,8 +2,8 @@ POST http://localhost:5000/credit
 Content-Type: application/json
 
 {
-  "accountId": "5dab09c3ec8f42009435a902",
-  "amount": 50,
+  "accountId": "5daecba15ecdda7700e6e788",
+  "amount": 150,
   "version": 1
 }
 
