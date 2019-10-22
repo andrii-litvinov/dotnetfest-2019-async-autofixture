@@ -35,8 +35,7 @@ namespace Tests.Primitives
 
         public static IFixture RegisterInitializer<T>(this IFixture fixture) where T : IAsyncLifetime
         {
-            var instance = fixture.Create<T>();
-            AsyncContext.Add(instance);
+            fixture.Create<T>();
             return fixture;
         }
     }
