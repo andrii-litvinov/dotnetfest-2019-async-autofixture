@@ -23,7 +23,7 @@ namespace Service
 
             try
             {
-                await CreateHostBuilder(container, logger, args).Build().RunAsync();
+                await CreateHostBuilder(container, logger, args, true).Build().RunAsync();
             }
             catch (Exception e)
             {
@@ -34,12 +34,14 @@ namespace Service
             return 0;
         }
 
-        public static IHostBuilder CreateHostBuilder(Container container, ILogger logger, string[] args) =>
+        public static IHostBuilder CreateHostBuilder(
+            Container container, ILogger logger, string[] args, bool verify = false) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(builder => { ConfigureWebHost(container, logger, builder); });
+                .ConfigureWebHostDefaults(builder => { ConfigureWebHost(container, logger, verify, builder); });
 
         public static IWebHostBuilder ConfigureWebHost(
-            Container container, ILogger logger, IWebHostBuilder builder = null) => (builder ?? new WebHostBuilder())
+            Container container, ILogger logger, bool verify = false, IWebHostBuilder builder = null) =>
+            (builder ?? new WebHostBuilder())
             .ConfigureServices(services =>
             {
                 services.AddControllers();
@@ -60,7 +62,8 @@ namespace Service
                     options.UseMiddleware<LoggingContextMiddleware>(app);
                     options.UseMiddleware<DomainExceptionHandlingMiddleware>(app);
                 });
-                container.Verify();
+
+                if (verify) container.Verify();
 
                 app.UseRouting();
                 app.UseEndpoints(endpoints => endpoints.MapControllers());
