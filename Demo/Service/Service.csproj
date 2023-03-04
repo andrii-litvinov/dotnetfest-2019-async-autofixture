@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MongoDB.Driver" Version="2.9.2" />
+        <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
         <PackageReference Include="Serilog" Version="2.9.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="3.1.0" />
         <PackageReference Include="Serilog.Enrichers.Demystify" Version="1.0.0-dev-00019" />
